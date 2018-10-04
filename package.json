@@ -2,7 +2,7 @@
   "name": "lim-2018-01-todo-list-frameworks",
   "version": "0.1.0",
   "private": true,
-
+  "homepage": "https://dianaapz.github.io/lim-2018-01-todo-list-frameworks/",
   "dependencies": {
     "firebase": "^5.5.2",
     "react": "^16.5.1",
