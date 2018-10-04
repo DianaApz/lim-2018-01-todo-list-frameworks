@@ -22,9 +22,26 @@
   color: #61dafb;
 }
 .note{
-  background-color:rgba(181, 177, 238, 0.822); 
+  background-color:rgba(196, 190, 216, 0.822); 
   padding: 10px;
   margin:25px;
+  color:black;
+}
+.black{
+  color:black;
+  cursor: pointer;
+}
+.section{
+  text-align: right;
+}
+.close{
+  padding: 5%;
+  cursor: pointer;
+}
+.black.pink{
+  cursor: pointer;
+  color:palevioletred;
+  font-weight: bolder;
 }
 .close{
   text-align: right;

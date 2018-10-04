@@ -10,16 +10,19 @@ class Input extends Component {
         this.write = this.write.bind(this);
     }
     handleInput(e) {
-        console.log(this);
         this.setState({
             newMessage: e.target.value, 
         })
     }
     write() {
-        this.props.add(this.state.newMessage);
-        this.setState({
-            newMessage: '',
-        })
+        if(this.state.newMessage!==''){
+            this.props.add(this.state.newMessage);
+            this.setState({
+               newMessage: '',
+           })
+        }else{
+            alert('write');
+        }
     }
     render() {
         return (
@@ -27,9 +30,10 @@ class Input extends Component {
                 <input
                     placeholder="Write ..."
                     value={this.state.newMessage}
-                    onChange={this.handleInput} />
+                    onChange={this.handleInput} type="text"
+                />
                 <button
-                    onClick={this.write}>Add Note</button>
+                    onClick={this.write}>add</button>
             </div>
         )
     }
