@@ -4,6 +4,7 @@ import 'firebase/database';
 class ListNotes extends Component {
     constructor(props) {
         super(props);
+        console.log(props);
         this.app=firebase;
         this.data = this.app.database().ref().child('notes');
         this.state = { addClass: false }
@@ -23,10 +24,10 @@ class ListNotes extends Component {
         
         if(check==='no'){
             this.data.child(id).set({message: message, check: 'yes'})
-            this.setState({ addClass: !this.state.addClass });
+            this.setState({ addClass: true });
         }else if (check==='yes'){
             this.data.child(id).set({message: message, check: 'no'})
-            this.setState({ addClass: this.state.addClass });
+            this.setState({ addClass: false });
         }
         // console.log(check)
         // this.props.check(id,message);
