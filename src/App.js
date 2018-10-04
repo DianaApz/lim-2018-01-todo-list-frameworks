@@ -21,6 +21,7 @@ class App extends Component {
     }
     this.add = this.add.bind(this);
     this.delete = this.delete.bind(this);
+    // this.check = this.check.bind(this);
 
   }
   componentWillMount() {
@@ -29,6 +30,7 @@ class App extends Component {
       list.push({
         id: snap.key,
         message: snap.val().message,
+        check:snap.val().check
       });
       this.setState({
         notes: list
@@ -44,40 +46,57 @@ class App extends Component {
         notes: list
       })
     })
+    // this.data.on('child_changed', snap => {
+    //   list.forEach((listNote) => {
+    //     if (listNote.id === snap.key) {
+    //       if(listNote.check==='yes'){
+    //         snap.check==='no'
+    //       }else{
+    //         snap.check==='yes'
+    //       }
+    //     }
+    //   })
+    //   this.setState({
+    //     notes: list
+    //   })
+    // })
   }
 
-  add(note) {
-    this.data.push().set({ message: note})
-  }
+    add(note) {
+      this.data.push().set({ message: note, check:'no' })
+    }
 
-  delete(id) {
-    this.data.child(id).remove();
-  }
+    delete (id) {
+      this.data.child(id).remove();
+    }
+   
 
-  render() {
-    return (
-      <div className='App' >
-        <div className='App-header'>
-          <h2>Welcome to-do-list</h2>
-          <div><Input add={this.add} /></div>
-        </div>
-        <div>
-          <div>{
+    render() {
+      return (
+        <div className='App' >
+          <div className='App-header'>
+            <h2>Welcome to-do-list</h2>
+            <div><Input add={this.add} /></div>
+          </div>
+          <div>
+            <div>{
 
-            this.state.notes.map(note => {
-              return (
-                <ListNotes
-                  id={note.id}
-                  key={note.id}
-                  message={note.message}
-                  delete={this.delete}
-                />
-              )
-            })}
+              this.state.notes.map(note => {
+                return (
+                  <ListNotes
+                    id={note.id}
+                    key={note.id}
+                    message={note.message}
+                    delete={this.delete}
+                    check={note.check}
+
+                  />
+                )
+              })}
+            </div>
           </div>
         </div>
-      </div>
-    )
+      )
+    }
   }
-}
-export default App;
+  export default App;
