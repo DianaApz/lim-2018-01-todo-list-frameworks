@@ -72,6 +72,17 @@ class App extends Component {
    
 
     render() {
+      const draw=this.state.notes.map(note=>{
+        return(<ListNotes
+          id={note.id}
+          key={note.id}
+          message={note.message}
+          delete={this.delete}
+          check={note.check}
+
+        />
+      )
+      })
       return (
         <div className='App' >
           <div className='App-header'>
@@ -79,20 +90,7 @@ class App extends Component {
             <div><Input add={this.add} /></div>
           </div>
           <div>
-            <div>{
-
-              this.state.notes.map(note => {
-                return (
-                  <ListNotes
-                    id={note.id}
-                    key={note.id}
-                    message={note.message}
-                    delete={this.delete}
-                    check={note.check}
-
-                  />
-                )
-              })}
+            <div>{draw}
             </div>
           </div>
         </div>
