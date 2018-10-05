@@ -4,34 +4,57 @@ import 'firebase/database';
 class ListNotes extends Component {
     constructor(props) {
         super(props);
-        console.log(props);
-        this.app=firebase;
+        this.app = firebase;
         this.data = this.app.database().ref().child('notes');
         this.state = { addClass: false }
+        this.state = { check: ''}
         this.message = props.message;
-        this.check=props.check;
+        // this.check=props.check;
         this.note = props.note;
         this.id = props.id;
         this.handleDelete = this.handleDelete.bind(this);
         this.handleCheck.bind(this);
+        //    let checked=this.state.check
+        
+        
+
+    }
+  componentWillMount() {
+        let checked=this.state.check
+        this.data.on('child_added', snap => {
+            checked=snap.val().check
+            this.setState({ 
+                check: checked
+            })
+        })
+        this.data.on('child_changed', snap => {
+            checked=snap.val().check
+            this.setState({ 
+                check: checked
+            })
+        })
+        
     }
     
 
     handleDelete(id) {
         this.props.delete(id);
     }
-    handleCheck(id,message,check){
-        
-        if(check==='no'){
-            this.data.child(id).set({message: message, check: 'yes'})
+    handleCheck(id, message, check) {
+        // console.log(this.state.check);
+        // let color=this.ref.color;
+        if (check === 'no') {
+            this.data.child(id).set({ message: message, check: 'yes' })
+            // color.classList.add('pink')
             this.setState({ addClass: true });
-        }else if (check==='yes'){
-            this.data.child(id).set({message: message, check: 'no'})
+        } else if (check === 'yes') {
+            this.data.child(id).set({ message: message, check: 'no' })
+            // color.classList.add('black')
             this.setState({ addClass: false });
         }
         // console.log(check)
         // this.props.check(id,message);
-        
+
 
         // this.data.child(id).set({message: message, check: 'yes'})
     }
@@ -45,9 +68,10 @@ class ListNotes extends Component {
         return (
             <div className="note">
 
-                <div className='section'><span 
-                className={classList.join(' ')} 
-                 onClick={() => this.handleCheck(this.id,this.message,this.check)}>✔</span>
+                <div><span
+                    className={classList.join(' ')} 
+                    // ref='color'
+                    onClick={() => this.handleCheck(this.id, this.message, this.state.check)}>✔</span>
                     <span className="close"
                         onClick={() => this.handleDelete(this.id)}>
                         x
