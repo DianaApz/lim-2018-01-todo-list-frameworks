@@ -9,15 +9,10 @@ class ListNotes extends Component {
         this.state = { addClass: false }
         this.state = { check: ''}
         this.message = props.message;
-        // this.check=props.check;
         this.note = props.note;
         this.id = props.id;
-        this.handleDelete = this.handleDelete.bind(this);
-        this.handleCheck.bind(this);
-        //    let checked=this.state.check
-        
-        
-
+        this.delete = this.delete.bind(this);
+        this.check.bind(this);
     }
   componentWillMount() {
         let checked=this.state.check
@@ -33,24 +28,36 @@ class ListNotes extends Component {
                 check: checked
             })
         })
-        
     }
-    
-
-    handleDelete(id) {
-        this.props.delete(id);
+    delete(id) {
+        this.data.child(id).remove();
     }
-    handleCheck(id, message, check) {
+    check(id, message, check) {
         // console.log(this.state.check);
-        // let color=this.ref.color;
+        // let color=this.refs.color;
+        // let classList = ['black'];
+        // if (this.state.addClass) {
+            
+        
         if (check === 'no') {
+
             this.data.child(id).set({ message: message, check: 'yes' })
-            // color.classList.add('pink')
-            this.setState({ addClass: true });
+            return(
+                <span className="pink">✔</span>
+            )
+            // classList.push('pink');
+            // this.setState({ check:'yes', bgColor: 'pink' });
         } else if (check === 'yes') {
-            this.data.child(id).set({ message: message, check: 'no' })
-            // color.classList.add('black')
-            this.setState({ addClass: false });
+            // color.classList.add('pink')
+            // color.classList.remove('pink')
+             this.data.child(id).set({ message: message, check: 'no' })
+            return(
+                <span className="black">✔</span>
+            )
+    
+            // this.setState({ check:'no', bgColor: 'black' });
+            
+            
         }
         // console.log(check)
         // this.props.check(id,message);
@@ -61,19 +68,16 @@ class ListNotes extends Component {
 
 
     render() {
-        let classList = ['black'];
-        if (this.state.addClass) {
-            classList.push('pink');
-        } 
+        
         return (
             <div className="note">
 
                 <div><span
-                    className={classList.join(' ')} 
+                    // className={classList.join(' ')} 
                     // ref='color'
-                    onClick={() => this.handleCheck(this.id, this.message, this.state.check)}>✔</span>
+                    onClick={() => this.check(this.id, this.message, this.state.check)}>✔</span>
                     <span className="close"
-                        onClick={() => this.handleDelete(this.id)}>
+                        onClick={() => this.delete(this.id)}>
                         x
               </span>
                 </div>

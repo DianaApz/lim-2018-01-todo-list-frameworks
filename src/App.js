@@ -19,10 +19,6 @@ class App extends Component {
     this.state = {
       notes: [],
     }
-    this.add = this.add.bind(this);
-    this.delete = this.delete.bind(this);
-    // this.check = this.check.bind(this);
-
   }
   componentWillMount() {
     const list = this.state.notes;
@@ -61,16 +57,6 @@ class App extends Component {
     //   })
     // })
   }
-
-    add(note) {
-      this.data.push().set({ message: note, check:'no' })
-    }
-
-    delete (id) {
-      this.data.child(id).remove();
-    }
-   
-
     render() {
       const draw=this.state.notes.map(note=>{
         return(<ListNotes
