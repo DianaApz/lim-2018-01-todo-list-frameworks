@@ -1,12 +1,12 @@
 .black{
   color:black;
-  background-color: aqua;
+
   cursor: pointer;
 }
 .pink{
   cursor: pointer;
-  color:palevioletred;
-  background-color: blue;
+  color:rgb(7, 226, 255);
+
   font-weight: bolder;
 }
 .list{

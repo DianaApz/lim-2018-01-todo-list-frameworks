@@ -6,7 +6,7 @@ class ListNotes extends Component {
         super(props);
         this.app = firebase;
         this.data = this.app.database().ref().child('notes');
-        this.state = { addClass: false }
+        this.state = { addClass:'' }
         this.state = { check: '' }
         this.message = props.message;
         this.id = props.id;
@@ -32,14 +32,14 @@ class ListNotes extends Component {
     check(id, name, message, check) {
         if (check === 'no') {
             this.data.child(id).set({ name: name, message: message, check: 'yes' })
-            return (
-                <span className="pink">✔</span>
-            )
+            this.setState({
+                addClass:'black'
+            })
         } else if (check === 'yes') {
             this.data.child(id).set({ name: name, message: message, check: 'no' })
-            return (
-                <span className="black">✔</span>
-            )
+            this.setState({
+                addClass:'pink'
+            })
         }
     }
     handleDelete(id) {
@@ -52,7 +52,7 @@ class ListNotes extends Component {
                 <div className="card">
                     <div className="card-body">
                         <div className="float-right">
-                            <span 
+                            <span className={this.state.addClass}
                             onClick={() => this.check(this.id, this.name, this.message, this.state.check)}>✔</span>
                             <span className="check" onClick={() => this.handleDelete(this.id)}><i className="fas fa-trash-alt"
                             >
