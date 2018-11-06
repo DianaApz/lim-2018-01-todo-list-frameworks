@@ -1,61 +1,46 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 300px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-.note{
-  background-color:rgba(196, 190, 216, 0.822); 
-  padding: 10px;
-  margin:25px;
-  color:black;
-}
 .black{
   color:black;
-  cursor: pointer;
-}
-.section{
-  text-align: right;
-}
-.close{
-  padding: 5%;
+  background-color: aqua;
   cursor: pointer;
 }
 .pink{
   cursor: pointer;
   color:palevioletred;
+  background-color: blue;
   font-weight: bolder;
 }
-.close{
-  text-align: right;
+.list{
+  padding: 8% 3% 0% 3%;
+}
+.card{
+  background-color: rgb(219, 245, 250);
+}
+.inputWrite{
+  padding: 26% 0% 0% 0%; 
+  text-align: center;
+}
+.input{
+  margin-bottom: 5%; 
+  background-color: rgb(247, 252, 253);
+  color: gray;
+}
+*{
+  font-size: 1px;
+}
+.check{
+  margin-left:5%; 
+}
+@media screen and (max-width: 500px) {
+  .list{
+    padding: 2% 3% 2% 3%;
+  }
+  .inputWrite{
+    padding: 10% 5% 10% 5%; 
+  }
+  *{
+    font-size: 20px;
+  }
 }
 
-.App-intro {
-  background-color: white;
-}
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+

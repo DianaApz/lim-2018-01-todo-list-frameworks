@@ -7,85 +7,63 @@ class ListNotes extends Component {
         this.app = firebase;
         this.data = this.app.database().ref().child('notes');
         this.state = { addClass: false }
-        this.state = { check: ''}
+        this.state = { check: '' }
         this.message = props.message;
-        this.note = props.note;
         this.id = props.id;
-        this.delete = this.delete.bind(this);
+        this.name = props.name;
+        this.delete = this.handleDelete.bind(this);
         this.check.bind(this);
     }
-  componentWillMount() {
-        let checked=this.state.check
+    componentWillMount() {
+        let checked = this.state.check
         this.data.on('child_added', snap => {
-            checked=snap.val().check
-            this.setState({ 
+            checked = snap.val().check
+            this.setState({
                 check: checked
             })
         })
         this.data.on('child_changed', snap => {
-            checked=snap.val().check
-            this.setState({ 
+            checked = snap.val().check
+            this.setState({
                 check: checked
             })
         })
     }
-    delete(id) {
-        this.data.child(id).remove();
-    }
-    check(id, message, check) {
-        // console.log(this.state.check);
-        // let color=this.refs.color;
-        // let classList = ['black'];
-        // if (this.state.addClass) {
-            
-        
+    check(id, name, message, check) {
         if (check === 'no') {
-
-            this.data.child(id).set({ message: message, check: 'yes' })
-            return(
+            this.data.child(id).set({ name: name, message: message, check: 'yes' })
+            return (
                 <span className="pink">✔</span>
             )
-            // classList.push('pink');
-            // this.setState({ check:'yes', bgColor: 'pink' });
         } else if (check === 'yes') {
-            // color.classList.add('pink')
-            // color.classList.remove('pink')
-             this.data.child(id).set({ message: message, check: 'no' })
-            return(
+            this.data.child(id).set({ name: name, message: message, check: 'no' })
+            return (
                 <span className="black">✔</span>
             )
-    
-            // this.setState({ check:'no', bgColor: 'black' });
-            
-            
         }
-        // console.log(check)
-        // this.props.check(id,message);
-
-
-        // this.data.child(id).set({message: message, check: 'yes'})
+    }
+    handleDelete(id) {
+        this.data.child(id).remove();
     }
 
-
     render() {
-        
         return (
-            <div className="note">
-
-                <div><span
-                    // className={classList.join(' ')} 
-                    // ref='color'
-                    onClick={() => this.check(this.id, this.message, this.state.check)}>✔</span>
-                    <span className="close"
-                        onClick={() => this.delete(this.id)}>
-                        x
-              </span>
+            <div className="col-sm-12 col-md-6 list">
+                <div className="card">
+                    <div className="card-body">
+                        <div className="float-right">
+                            <span 
+                            onClick={() => this.check(this.id, this.name, this.message, this.state.check)}>✔</span>
+                            <span className="check" onClick={() => this.handleDelete(this.id)}><i className="fas fa-trash-alt"
+                            >
+                            </i></span>
+                        </div>
+                        <p className="card-text">{this.message}</p>
+                        <footer className="blockquote-footer">By : {this.name}</footer>
+                    </div>
                 </div>
-
-                <p>{this.message}</p>
             </div>
         )
     }
 }
-
 export default ListNotes
